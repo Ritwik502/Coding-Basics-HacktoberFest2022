@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution{
+    public:
+    // arr: input array
+    // n: size of array
+    //Function to find the sum of contiguous subarray with maximum sum.
+    long long maxSubarraySum(int arr[], int n){
+        long long int inf=1e18+5;
+        long long int in=0, ax=inf*(-1),temp=inf*(-1),lmp;
+        for(int i=1;i<n;i++){
+            arr[i]=arr[i-1]+arr[i];
+        }
+        in=arr[0];
+        for(int i=1;i<n;i++){
+            lmp=arr[i];
+            temp=max(lmp,(arr[i]-in));
+            if(temp>ax) ax=temp;
+            if(arr[i]<in) in=arr[i];
+            // cout<<in<<endl;
+        }
+        for(int i=0;i<n;i++){
+            
+            if(arr[i]>ax) ax=arr[i];
+        }
+
+        return ax;
+    }
+};
+
+
+int main()
+{
+    int t,n;
+    
+    cin>>t; //input testcases
+    while(t--) //while testcases exist
+    {
+        
+        cin>>n; //input size of array
+        
+        int a[n];
+        
+        for(int i=0;i<n;i++)
+            cin>>a[i]; //inputting elements of array
+            
+        Solution ob;
+        
+        cout << ob.maxSubarraySum(a, n) << endl;
+    }
+}
